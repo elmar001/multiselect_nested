@@ -40,6 +40,16 @@ class MultiSelectNested extends StatefulWidget {
   final bool checkParentWhenChildIsSelected;
 
   ///
+  /// Disable selecting parents depending on development requirements
+  ///
+  final bool disableParentSelection;
+
+  ///
+  /// 2 more params needed: bool checkChildrenWhenParentIsSelected, int maxAllowedSelectionOptions (Close the open options box and show indicator). 
+  /// Plus opening options box is very troublesome now,  icon touch surface is too small and takes multiple touches to finally open it
+  ///
+
+  ///
   /// Use this controller to get access to internal state of the Multiselect
   ///
   final MultiSelectNestedController? controller;
@@ -130,6 +140,7 @@ class MultiSelectNested extends StatefulWidget {
     this.isAnimatedContainer = false,
     this.liveUpdateValues = false,
     this.checkParentWhenChildIsSelected = false,
+    this.disableParentSelection = false,
     this.paddingDropdown = const EdgeInsets.all(8),
     this.paddingSelectedItems = const EdgeInsets.all(8),
     this.effectAnimatedContainer = Curves.fastOutSlowIn,
@@ -342,7 +353,8 @@ class _MultiSelectNestedState extends State<MultiSelectNested> {
           child: ExpansionTile(
             tilePadding: const EdgeInsets.all(0),
             iconColor: widget.collapsedIconColor,
-            leading: Stack(
+            leading: disableParentSelection ? Container():
+            Stack(
               children: [
                 Checkbox(
                   value: _checkIsSelected(item),
