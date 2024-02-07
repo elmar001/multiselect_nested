@@ -353,7 +353,7 @@ class _MultiSelectNestedState extends State<MultiSelectNested> {
           child: ExpansionTile(
             tilePadding: const EdgeInsets.all(0),
             iconColor: widget.collapsedIconColor,
-            leading: widget.disableParentSelection ? Container():
+            leading: widget.disableParentSelection ? SizedBox(width: 10, height: 10):
             Stack(
               children: [
                 Checkbox(
